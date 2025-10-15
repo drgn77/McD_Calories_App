@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Podsumowanie</h1>
+
+{% if not items or not cart %}
+  <!-- Empty cart state -->
+  <p>🛒 Koszyk jest pusty.</p>
+  <form method="post" action="{{ url_for('cart_clear') }}">
+    <button type="submit" class="btn-danger">Wyczyść koszyk</button>
+  </form>
+
+{% else %}
+  <!-- Per-item breakdown -->
+  <table>
+    <tr>
+      <th>Produkt</th><th>Ilość</th><th>kcal</th><th>Białko</th><th>Tłuszcz</th><th>Węgle</th><th>Sól</th>
+    </tr>
+    {% for it in items %}
+    <tr>
+      <td>{{ it["name"] }}</td>
+      <td>{{ cart[it["slug"]] }}</td>
+      <td>{{ it["energy_kcal"] * cart[it["slug"]] }}</td>
+      <td>{{ "%.1f"|format(it["protein_g"] * cart[it["slug"]]) }}</td>
+      <td>{{ "%.1f"|format(it["fat_g"] * cart[it["slug"]]) }}</td>
+      <td>{{ "%.1f"|format(it["carbs_g"] * cart[it["slug"]]) }}</td>
+      <td>{{ "%.2f"|format(it["salt_g"] * cart[it["slug"]]) }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+
+  <!-- Totals -->
+  <h2>Łącznie</h2>
+  <ul>
+    <li>Kalorie: {{ total.energy_kcal|int }} kcal</li>
+    <li>Białko: {{ "%.1f"|format(total.protein_g) }} g</li>
+    <li>Tłuszcz: {{ "%.1f"|format(total.fat_g) }} g</li>
+    <li>Węglowodany: {{ "%.1f"|format(total.carbs_g) }} g</li>
+    <li>Sól: {{ "%.2f"|format(total.salt_g) }} g</li>
+  </ul>
+
+  <!-- Clear cart action -->
+  <form method="post" action="{{ url_for('cart_clear') }}">
+    <button type="submit" class="btn-danger">🗑️ Wyczyść koszyk</button>
+  </form>
+{% endif %}
+{% endblock %}

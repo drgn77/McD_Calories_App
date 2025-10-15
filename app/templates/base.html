@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <title>McD Calories App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body>
+  <!-- Top navigation with brand and cart summary -->
+  <header class="site-header">
+    <div class="container header-row">
+      <div class="brand">
+        <a class="brand-link" href="{{ url_for('menu_view') }}">🍔 McD Calories</a>
+        <nav class="main-nav">
+          <a href="{{ url_for('menu_view') }}">Menu</a>
+        </nav>
+      </div>
+
+      <!-- Cart summary pill (always visible) -->
+      <a class="cart-pill" href="{{ url_for('check_view') }}" title="Przejdź do podsumowania">
+        🛒 {{ cart_summary.count }} pozycje
+        <span class="dot"></span>
+        {{ cart_summary.kcal|int }} kcal
+        <span class="dot"></span>
+        {{ "%.1f"|format(cart_summary.protein) }} g białka
+      </a>
+    </div>
+  </header>
+
+  <!-- Main app outlet -->
+  <main class="container">
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>

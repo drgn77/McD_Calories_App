@@ -1,0 +1,128 @@
+/* ========= Theme colors ========= */
+:root{
+  --bg: #0f172a;           /* dark navy background */
+  --panel: #111827;        /* panel/card background */
+  --panel-2: #1f2937;
+  --text: #e5e7eb;         /* primary text */
+  --muted: #9ca3af;        /* secondary text */
+  --border: #243041;
+  --accent: #22c55e;       /* green accent */
+  --accent-2: #3b82f6;     /* blue accent */
+  --danger: #ef4444;       /* red */
+  --badge: #0ea5e9;        /* cyan for badges */
+}
+
+/* ========= Layout ========= */
+html, body { height: 100%; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans",
+               "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+.container { max-width: 1100px; margin: 0 auto; padding: 16px; }
+
+/* ========= Header ========= */
+.site-header { background: rgba(17,24,39,0.85); border-bottom: 1px solid var(--border); backdrop-filter: blur(6px); position: sticky; top: 0; z-index: 20; }
+.header-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.brand { display: flex; align-items: center; gap: 16px; }
+.brand-link { color: var(--text); text-decoration: none; font-weight: 700; }
+.main-nav a { color: var(--muted); text-decoration: none; margin-right: 12px; }
+.main-nav a:hover { color: var(--text); }
+
+/* ========= Cart pill ========= */
+.cart-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--panel-2);
+  color: var(--text);
+  text-decoration: none;
+  font-size: 14px;
+}
+.cart-pill:hover { border-color: var(--accent-2); }
+.cart-pill .dot {
+  display: inline-block; width: 6px; height: 6px; border-radius: 999px; background: var(--muted);
+}
+
+/* ========= Forms & buttons ========= */
+form.search { display:flex; gap:8px; margin: 12px 0 16px; }
+input[type="text"] {
+  padding:10px 12px; border:1px solid var(--border); border-radius:10px; background: var(--panel);
+  color: var(--text); outline: none;
+}
+input[type="text"]::placeholder { color: var(--muted); }
+
+button, .btn {
+  padding:10px 12px; border-radius:10px; border:1px solid var(--border);
+  background: var(--panel); color: var(--text); cursor:pointer;
+}
+button:hover, .btn:hover { border-color: var(--accent-2); }
+
+.btn-primary { background: linear-gradient(180deg, #2563eb, #1d4ed8); border-color: #1d4ed8; }
+.btn-primary:hover { filter: brightness(1.05); }
+
+.btn-danger { background: linear-gradient(180deg, #ef4444, #dc2626); border-color:#dc2626; color: #fff; }
+
+/* ========= Filter chips ========= */
+.chips { margin-bottom: 8px; }
+.pill {
+  padding: 6px 10px; border-radius: 999px; border:1px solid var(--border);
+  display:inline-block; margin: 4px 6px 0 0; color: var(--muted); text-decoration:none; background: var(--panel);
+}
+.pill.active, .pill:hover { color:#fff; border-color: var(--accent-2); }
+
+/* ========= Product cards ========= */
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
+.card {
+  border:1px solid var(--border); border-radius: 14px; padding: 14px;
+  background: linear-gradient(180deg, var(--panel), #0e1626);
+  transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+}
+.card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.25); border-color: var(--accent-2); }
+
+.card-head { display:flex; justify-content: space-between; align-items:center; margin-bottom: 6px; }
+.title { font-weight: 700; }
+.kcal { font-weight: 700; color: #facc15; } /* “gold” calories */
+
+.muted { color:#9ca3af; font-size: 0.9rem; }
+.macro { display:flex; flex-wrap: wrap; gap: 10px; margin: 8px 0 4px; color: #cbd5e1; font-size: .92rem; }
+
+.actions { display: flex; gap: 8px; margin-top: 10px; }
+
+.btn-add {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #fff;
+}
+.badge {
+  display: inline-block;
+  min-width: 20px;
+  padding: 2px 6px;
+  font-size: 12px;
+  line-height: 1;
+  border-radius: 999px;
+  background: var(--badge);
+  color: #05243d;
+  text-align: center;
+  font-weight: 700;
+}
+
+.btn-remove {
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: linear-gradient(180deg, #ef4444, #b91c1c);
+  color: #fff;
+}
+.btn-remove:hover { filter: brightness(1.06); }
+
+/* ========= Tables ========= */
+table { border-collapse: collapse; width: 100%; margin-top: 16px; background: var(--panel); border:1px solid var(--border); border-radius: 10px; overflow: hidden; }
+th, td { border-bottom: 1px solid var(--border); padding: 10px; text-align: center; }
+th { background: var(--panel-2); color: var(--text); }
+tr:last-child td { border-bottom: none; }

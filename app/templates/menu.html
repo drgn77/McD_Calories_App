@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Menu</h1>
+
+<!-- Category filter chips -->
+<div class="chips">
+  {% for cat in categories %}
+    <a class="pill {% if current_category == cat %}active{% endif %}"
+       href="{{ url_for('menu_view', category=cat, q=q) }}">
+       {{ cat_labels.get(cat, cat) }}
+    </a>
+  {% endfor %}
+  <a class="pill {% if not current_category %}active{% endif %}"
+     href="{{ url_for('menu_view', q=q) }}">wszystkie</a>
+</div>
+
+<!-- Search form (keeps selected category) -->
+<form class="search" method="get" action="{{ url_for('menu_view') }}">
+  {% if current_category %}
+    <input type="hidden" name="category" value="{{ current_category }}">
+  {% endif %}
+  <input type="text" name="q" placeholder="Szukaj po nazwie..." value="{{ q }}">
+  <button type="submit" class="btn-primary">Szukaj</button>
+  <a href="{{ url_for('menu_view', category=current_category) }}"><button type="button">Wyczyść</button></a>
+</form>
+
+<!-- Product list -->
+<div class="grid">
+  {% for it in items %}
+    {% set qty = cart.get(it['slug'], 0) %}
+    <div class="card">
+      <div class="card-head">
+        <div class="title">{{ it["name"] }}</div>
+        <div class="kcal">{{ it["energy_kcal"]|int }} kcal</div>
+      </div>
+      <div class="muted">{{ it["serving_label"] }} • {{ it["category"] }}</div>
+
+      <!-- Macros per portion -->
+      <div class="macro">
+        <span>Białko {{ "%.1f"|format(it["protein_g"]) }} g</span>
+        <span>Tł. {{ "%.1f"|format(it["fat_g"]) }} g</span>
+        <span>Węgle {{ "%.1f"|format(it["carbs_g"]) }} g</span>
+        <span>Sól {{ "%.2f"|format(it["salt_g"]) }} g</span>
+      </div>
+
+      <!-- Actions: add/remove -->
+      <div class="actions">
+        <form method="post" action="{{ url_for('cart_add') }}">
+          <input type="hidden" name="slug" value="{{ it['slug'] }}">
+          <input type="hidden" name="qty" value="1">
+          <button type="submit" class="btn-add btn-primary">
+            ➕ Dodaj
+            {% if qty > 0 %}
+              <span class="badge">{{ qty }}</span>
+            {% endif %}
+          </button>
+        </form>
+
+        {% if qty > 0 %}
+        <form method="post" action="{{ url_for('cart_remove') }}">
+          <input type="hidden" name="slug" value="{{ it['slug'] }}">
+          <button type="submit" class="btn-remove">🗑 Usuń</button>
+        </form>
+        {% endif %}
+      </div>
+    </div>
+  {% endfor %}
+</div>
+{% endblock %}
