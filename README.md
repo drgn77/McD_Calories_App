@@ -1,24 +1,43 @@
-# McD_Calories_App
-A simple Flask + SQLite web application that lets you explore the McDonald’s Poland menu, check the nutritional values (kcal, protein, fat, carbs, salt) of products, and calculate totals for your selected meal.
+# 🍔 McD Calories App
 
-🚀 Features
+A simple **Flask web application** that lets users browse McDonald’s menu, add products to a cart, and automatically calculate total calories, protein, fat, carbs, and salt.
 
-Browse menu items by category or search by name.
+---
 
-Add or remove products from the cart.
+## ✨ Features
+- 🔍 Browse products by category and search by name  
+- 🛒 Add and remove items from your cart  
+- 📊 View detailed nutrition summary (kcal, protein, fat, carbs, salt)  
+- 💾 Data stored in a local SQLite database  
+- 🎨 Clean, modern dark theme with responsive layout  
 
-See real-time totals for calories and protein in the header summary bar.
+---
 
-Detailed breakdown of your meal (macronutrients & salt) on the summary page.
+## 🖼️ Screenshots
 
-All data is stored locally in an SQLite database.
+### 🧾 Menu View
+Browse all products, filter by category or search by name.
 
-🧠 Tech stack
+![Menu Screenshot](screenshots/menu.png)
 
-Python 3.12+
+### 🛍️ Cart Summary
+See nutrition totals for selected products.
 
-Flask (web framework)
+![Cart Screenshot](screenshots/cart.png)
 
-SQLite (local database)
+### 🧠 Tech Stack
 
-HTML / CSS (custom theme)
+Python 3.11+
+
+Flask
+
+SQLite
+
+HTML + CSS
+
+### 💡 Author
+
+### drgn77
+💻 Created as a personal learning project to practice Python, Flask, and web design.
+
+Used gpt for documentation.

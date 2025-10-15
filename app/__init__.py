@@ -27,7 +27,7 @@ def create_app() -> Flask:
 
     # Database path: env override or default to data/menu.sqlite in the project root.
     base_dir = Path(__file__).resolve().parent.parent
-    db_path = os.getenv("DATABASE", str(base_dir / "data" / "menu.sqlite"))
+    db_path = os.getenv("DATABASE", str(base_dir / "data" / "menu.sqlite.db"))
     app.config["DATABASE"] = db_path
 
     # Register routes.
